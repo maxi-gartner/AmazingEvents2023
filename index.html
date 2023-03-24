@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="./assets/styles/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+            <div class="container-fluid">
+                <img src="./assets/images/Logo Amazing Events.png" style="height: 2rem;" alt="logo">
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                    <div class="offcanvas-header">
+                        <img src="./assets/images/Logo Amazing Events.png" style="height: 2rem;" alt="logo">
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item" id="nav-active">
+                        <a class="nav-link" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link" href="#">Upcoming Events</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link" href="#">Past Events</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link" href="#">Stats</a>
+                        </li>
+                    </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="carrucel-pages">
+            <a href="./assets/pages/Stats.html"><i class="bi bi-chevron-left"></i><span>Stats</span></a>
+            <h1>Home</h1>
+            <a class="second-a" href="./assets/pages/UpcomingEvents.html"><i class="bi bi-chevron-right"></i><span>Upcoming Events</span></a>
+        </div>
+        <div class="d-flex justify-content-between align-items-center categories-search">
+            <div class="categories">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                    <label class="form-check-label" for="inlineCheckbox1">Category</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                    <label class="form-check-label" for="inlineCheckbox2">Category</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option2">
+                    <label class="form-check-label" for="inlineCheckbox3">Category</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option2">
+                    <label class="form-check-label" for="inlineCheckbox4">Category</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option2">
+                    <label class="form-check-label" for="inlineCheckbox5">Category</label>
+                </div>
+            </div>
+            <form class="d-flex w-25">
+                <input class="form-control me-1" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
+            </form>
+        </div>
+        <div class="cards">
+            <div class="card">
+                <img class="card-img-top" src="./assets/images/books.jpg" alt="Card image cap">
+                <div class="card-body">
+                <h3 class="text-center">Title</h3>
+                <p class="card-text">Text description lorem</p>
+                </div>
+                <div class="footer-card">
+                    <p style="margin-top: 1rem;">Price : 0000</p>
+                    <button type="button" class="btn btn-secondary">More Information</button>
+                </div>
+            </div>
+            <div class="card">
+                <img class="card-img-top" src="./assets/images/Cine7.jpg" alt="Card image cap">
+                <div class="card-body">
+                <h3 class="text-center">Title</h3>
+                <p class="card-text">Text description lorem</p>
+                </div>
+                <div class="footer-card">
+                    <p style="margin-top: 1rem;">Price : 0000</p>
+                    <button type="button" class="btn btn-secondary">More Information</button>
+                </div>
+            </div>
+            <div class="card">
+                <img class="card-img-top" src="./assets/images/Concierto de musica1.jpg" alt="Card image cap">
+                <div class="card-body">
+                <h3 class="text-center">Title</h3>
+                <p class="card-text">Text description lorem</p>
+                </div>
+                <div class="footer-card">
+                    <p style="margin-top: 1rem;">Price : 0000</p>
+                    <button type="button" class="btn btn-secondary">More Information</button>
+                </div>
+            </div>
+            <div class="card">
+                <img class="card-img-top" src="./assets/images/Feria de comidas7.jpg" alt="Card image cap">
+                <div class="card-body">
+                <h3 class="text-center">Title</h3>
+                <p class="card-text">Text description lorem</p>
+                </div>
+                <div class="footer-card">
+                    <p style="margin-top: 1rem;">Price : 0000</p>
+                    <button type="button" class="btn btn-secondary">More Information</button>
+                </div>
+            </div>
+            <div class="card">
+                <img class="card-img-top" src="./assets/images/Fiesta de disfraces1.jpg" alt="Card image cap">
+                <div class="card-body">
+                <h3 class="text-center">Title</h3>
+                <p class="card-text">Text description lorem</p>
+                </div>
+                <div class="footer-card">
+                    <p style="margin-top: 1rem;">Price : 0000</p>
+                    <button type="button" class="btn btn-secondary">More Information</button>
+                </div>
+            </div>
+            <div class="card">
+                <img class="card-img-top" src="./assets/images/Maraton3.jpg" alt="Card image cap">
+                <div class="card-body">
+                <h3 class="text-center">Title</h3>
+                <p class="card-text">Text description lorem</p>
+                </div>
+                <div class="footer-card">
+                    <p style="margin-top: 1rem;">Price : 0000</p>
+                    <button type="button" class="btn btn-secondary">More Information</button>
+                </div>
+            </div>
+            <div class="card">
+                <img class="card-img-top" src="./assets/images/Salida al museo5.jpg" alt="Card image cap">
+                <div class="card-body">
+                <h3 class="text-center">Title</h3>
+                <p class="card-text">Text description lorem</p>
+                </div>
+                <div class="footer-card">
+                    <p style="margin-top: 1rem;">Price : 0000</p>
+                    <button type="button" class="btn btn-secondary">More Information</button>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+        <footer>
+            <div class="div_links_footer">
+                <div class="instagram">
+                    <a class="fabicon_link" href="https://www.instagram.com/maxi.gartner/"><i class="bi bi-instagram"></i></a>
+                </div>
+                <div class="facebook">
+                    <a class="fabicon_link" href="https://www.instagram.com/maxi.gartner/"><i class="bi bi-facebook"></i></a>
+                </div>
+                <div class="whats_app">
+                    <a class="fabicon_link" href="https://www.instagram.com/maxi.gartner/"><i class="bi bi-whatsapp"></i></a>
+                </div>
+            </div>
+    
+            <div class="cohort">
+                <p>Cohort N°46</p>
+            </div>
+        </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+</body>
+</html>

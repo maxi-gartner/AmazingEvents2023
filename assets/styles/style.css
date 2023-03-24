@@ -1,0 +1,189 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+@media screen and (min-width:767px) {
+    nav{
+        border-bottom: 1px solid #D90368;
+    }
+    .nav-item{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.356);
+        margin-left: 1vw;
+        border-radius: 0.3rem;
+        height: 1.5rem;
+        text-align: center;
+        font-size: 1.1rem;
+    }
+    .nav-item:hover{
+        border-bottom: 1px dashed #D90368;
+    }
+    .nav-link{
+        color: white;
+    }
+    .nav-link:hover{
+        color: #D90368;
+    }
+    #nav-active{
+        border-bottom: 1px dashed #D90368;
+        font-weight: bold;
+    }
+    #nav-active a{
+        color: #D90368;
+    }
+    .carrucel-pages i:hover{
+        color: black;
+    }
+    .carrucel-pages i:hover ~ span{
+        display: block;
+    }
+    .carrucel-pages a{
+        display: flex;
+        align-items: center;
+        font-size: 1.3rem;
+        text-decoration: none;
+        color: white;
+    }
+    .second-a span{
+        order: 1;
+    }
+    .second-a i{
+        order: 2;
+    }
+}
+body{
+    padding: 3rem 0rem;
+    background-color: #191825;
+    position: relative;
+}
+.carrucel-pages{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    height: 5rem;
+    background-color: #00000052;
+    color: white;
+}
+.carrucel-pages i{
+    font-size: 2.5rem;
+    color: white;
+}
+.carrucel-pages span{
+    display: none;
+}
+.carrucel-pages{
+    position: relative;
+}
+.carrucel-pages h1{
+    position: absolute;
+    width: 50vw;
+    margin-left: 22vw;
+    text-align: center;
+}
+.categories-search{
+    padding: 1.5rem 3rem;
+}
+.categories label{
+    color: white;
+}
+.categories input:checked ~ label{
+    color: #295CE0;
+}
+
+/* ------------------------------------cards-------------------------------- */
+.cards{
+    padding: 0rem 2rem;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+.card{
+    width: 20rem;
+    height: 25rem;
+    border: none;
+    margin: 2rem;
+    box-shadow: rgb(0, 0, 0) 0px 22px 70px 4px;
+}
+.card img{
+    height: 12rem;
+    object-fit: cover;
+}
+.card-body{
+    height: 10rem;
+    overflow: scroll;
+}
+.footer-card{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 4rem;
+}
+
+
+
+
+
+
+
+
+
+footer{
+    position: absolute;
+    background-color: #000000;
+    bottom: 0;
+    width: 100vw;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0rem 3rem;
+}
+.div_links_footer{
+    display: flex;
+    height: 4rem;
+}
+.div_links_footer div{
+    margin-right: 1rem;
+}
+
+.instagram{
+    background: radial-gradient(rgb(255, 0, 221) 0%, transparent 70%, rgb(0, 0, 0) 40%);
+    width: 4rem;
+    height: 4rem;
+    
+}
+.facebook{
+    background: radial-gradient(rgb(0, 17, 255) 0%, transparent 70%, rgb(0, 0, 0) 40%);
+    width: 4rem;
+    height: 4rem;
+}
+.whats_app{
+    background: radial-gradient(rgb(0, 255, 34) 0%, transparent 70%, rgb(0, 0, 0) 40%);
+    width: 4rem;
+    height: 4rem;
+}
+.fabicon_link{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 4rem;
+}
+.div_links_footer i{
+    font-size: 2rem;
+    color: black;
+}
+.div_links_footer i:hover{
+    font-size: 2.5rem;
+    color: white;
+}
+
+.cohort{
+    font-size: 35px;
+    color: white;
+    height: 3.2rem;
+}
