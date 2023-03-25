@@ -59,6 +59,7 @@ body{
     padding: 3rem 0rem;
     background-color: #191825;
     position: relative;
+    min-height: 98.9vw;
 }
 .carrucel-pages{
     display: flex;
@@ -71,6 +72,11 @@ body{
 }
 .carrucel-pages i{
     font-size: 2.5rem;
+    color: white;
+    transition: all 0.5s;
+}
+.carrucel-pages i:hover{
+    font-size: 3rem;
     color: white;
 }
 .carrucel-pages span{
@@ -123,7 +129,18 @@ body{
     align-items: center;
     height: 4rem;
 }
-
+/* --------------------------FORM-------------------------------- */
+.form-contact{
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    padding: 5vw 20vw;
+    color: white;
+}
+.form-contact input{
+    margin-bottom: 3vw;
+    width: 60vw;
+}
 
 
 
@@ -136,7 +153,8 @@ footer{
     position: absolute;
     background-color: #000000;
     bottom: 0;
-    width: 100vw;
+    left: 0;
+    width: 100%;
     color: white;
     display: flex;
     justify-content: space-between;
