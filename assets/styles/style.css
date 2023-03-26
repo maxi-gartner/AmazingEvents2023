@@ -175,7 +175,29 @@ body{
 .table-stats h2{
     padding-left: 0.5rem;
 }
-
+/* ---------------------------------------details-------------------------------- */
+.description{
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.card-details{
+    display: flex;
+    justify-content: space-between;
+    margin: 10vw;
+    padding: 2vw;
+    box-shadow: rgb(0, 0, 0) 0px 22px 70px 4px;
+    width: 80vw;
+}
+.card-details img,
+.card-details .description{
+    width: 37vw;
+    height: 25vw;
+    object-fit: cover;
+    text-align: center;
+    box-shadow: rgb(0, 0, 0) 0px 22px 70px 4px;
+}
 
 
 
