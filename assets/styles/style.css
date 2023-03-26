@@ -56,10 +56,10 @@
     }
 }
 body{
+    position: relative;
     padding: 3rem 0rem;
     background-color: #191825;
-    position: relative;
-    min-height: 98.9vw;
+    min-height: 100vh;
 }
 .carrucel-pages{
     display: flex;
@@ -109,11 +109,13 @@ body{
     flex-wrap: wrap;
 }
 .card{
+    background-color: transparent!important;
     width: 20rem;
     height: 25rem;
     border: none;
     margin: 2rem;
     box-shadow: rgb(0, 0, 0) 0px 22px 70px 4px;
+    color: white;
 }
 .card img{
     height: 12rem;
@@ -121,7 +123,7 @@ body{
 }
 .card-body{
     height: 10rem;
-    overflow: scroll;
+    /* overflow: scroll; */
 }
 .footer-card{
     display: flex;
@@ -141,8 +143,38 @@ body{
     margin-bottom: 3vw;
     width: 60vw;
 }
-
-
+/* ----------------------------TABLE-------------------------------- */
+.table-stats{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 4rem;
+    margin-left: 10vw;
+    width: 80vw;
+    color: white;
+    box-shadow: rgb(0, 0, 0) 0px 22px 70px 4px;
+}
+.table-stats table{
+    border: 1px solid white;
+    border-collapse: collapse;
+}
+.table-stats h2{
+    margin: 0;
+    border: 1px solid white;
+    background-color: #343a40;
+    width: 80vw;
+}
+.table-stats td,
+.table-stats th{
+    width: 30vw;
+    height: 3vw;
+    border: 1px solid white;
+}
+.table-stats td,
+.table-stats th,
+.table-stats h2{
+    padding-left: 0.5rem;
+}
 
 
 
@@ -150,8 +182,8 @@ body{
 
 
 footer{
+    background-color: #343a40;
     position: absolute;
-    background-color: #000000;
     bottom: 0;
     left: 0;
     width: 100%;
@@ -159,37 +191,37 @@ footer{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0rem 3rem;
+    padding: 0rem 2rem;
 }
 .div_links_footer{
     display: flex;
-    height: 4rem;
+    height: 2rem;
 }
 .div_links_footer div{
     margin-right: 1rem;
 }
 
 .instagram{
-    background: radial-gradient(rgb(255, 0, 221) 0%, transparent 70%, rgb(0, 0, 0) 40%);
-    width: 4rem;
-    height: 4rem;
+    background: radial-gradient(rgb(255, 0, 221) 0%, transparent 70%, rgba(0, 0, 0, 0) 40%);
+    width: 2rem;
+    height: 2rem;
     
 }
 .facebook{
-    background: radial-gradient(rgb(0, 17, 255) 0%, transparent 70%, rgb(0, 0, 0) 40%);
-    width: 4rem;
-    height: 4rem;
+    background: radial-gradient(rgb(0, 17, 255) 0%, transparent 70%, rgba(0, 0, 0, 0) 40%);
+    width: 2rem;
+    height: 2rem;
 }
 .whats_app{
-    background: radial-gradient(rgb(0, 255, 34) 0%, transparent 70%, rgb(0, 0, 0) 40%);
-    width: 4rem;
-    height: 4rem;
+    background: radial-gradient(rgb(0, 255, 34) 0%, transparent 70%, rgba(0, 0, 0, 0) 40%);
+    width: 2rem;
+    height: 2rem;
 }
 .fabicon_link{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 4rem;
+    height: 2rem;
 }
 .div_links_footer i{
     font-size: 2rem;
