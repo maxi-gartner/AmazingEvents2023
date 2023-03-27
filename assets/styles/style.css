@@ -54,9 +54,8 @@
     .second-a i{
         order: 2;
     }
-    .categories-offCanvas{
-        display: none;
-    }
+    .categories-offCanvas,
+    .button-categories,
     .offcanvas h2{
         display: none;
     }
@@ -286,10 +285,10 @@ footer{
     }
     .categories-offCanvas div,
     .categories-offCanvas h2{
-        margin-bottom: 5vw;
+        margin-bottom: 2vw;
     }
     .categories-offCanvas h2{
-        margin-top: 10vw;
+        margin-top: 4vw;
     }
     .categories-search form{
         width: 60vw !important;;
@@ -298,6 +297,8 @@ footer{
     .categories-search{
         display: flex;
         flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
     }
     .card{
         padding-bottom: 7vw;
@@ -336,5 +337,12 @@ footer{
     }
     .categories{
         display: none;
+    }
+    .button-categories button{
+        color: white;
+        background-color: #0d6efd;
+        width: 9rem;
+        height: 2.4rem;
+        border-radius: 0.5rem;
     }
 }
