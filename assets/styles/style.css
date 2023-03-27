@@ -345,4 +345,18 @@ footer{
         height: 2.4rem;
         border-radius: 0.5rem;
     }
+    .card-details{
+        display: flex;
+        flex-direction: column;
+    }
+    .card-details img,
+    .card-details .description{
+        width: auto;
+        height: auto;
+    }
+    .card-details .description{
+        margin-top: 5vw;
+        background-color: #19182500;
+        box-shadow: none;
+    }
 }
