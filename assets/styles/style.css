@@ -35,19 +35,6 @@
     #nav-active a{
         color: #D90368;
     }
-    .carrucel-pages i:hover{
-        color: black;
-    }
-    .carrucel-pages i:hover ~ span{
-        display: block;
-    }
-    .carrucel-pages a{
-        display: flex;
-        align-items: center;
-        font-size: 1.3rem;
-        text-decoration: none;
-        color: white;
-    }
     .second-a span{
         order: 1;
     }
@@ -66,36 +53,6 @@ body{
     background-color: #191825;
     min-height: 100vh;
 }
-.carrucel-pages{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 2rem;
-    height: 5rem;
-    background-color: #00000052;
-    color: white;
-}
-.carrucel-pages i{
-    font-size: 2.5rem;
-    color: white;
-    transition: all 0.5s;
-}
-.carrucel-pages i:hover{
-    font-size: 3rem;
-    color: white;
-}
-.carrucel-pages span{
-    display: none;
-}
-.carrucel-pages{
-    position: relative;
-}
-.carrucel-pages h1{
-    position: absolute;
-    width: 50vw;
-    margin-left: 22vw;
-    text-align: center;
-}
 .categories{
     width: 50vw;
 }
@@ -108,7 +65,21 @@ body{
 .categories input:checked ~ label{
     color: #295CE0;
 }
-
+.carousel-inner img{
+    width: 49vw;/* 
+    height: 30vw; */
+}
+.carousel-inner{
+    overflow: hidden;
+    height: 15vw;
+}
+.carrucel-pages{
+    position: relative;
+}
+.carrucel-pages h1{
+    position: absolute;
+    bottom: 15rem;
+}
 /* ------------------------------------cards-------------------------------- */
 .cards{
     padding: 0rem 2rem;
