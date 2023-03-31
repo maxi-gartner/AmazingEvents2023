@@ -65,20 +65,32 @@ body{
 .categories input:checked ~ label{
     color: #295CE0;
 }
-.carousel-inner img{
-    width: 49vw;/* 
-    height: 30vw; */
-}
 .carousel-inner{
     overflow: hidden;
-    height: 15vw;
+    height: 25vw;
+    min-height: 25vh;
+    display: flex;
+    align-items: center;
+}
+.carousel-inner img{
+    object-fit: cover;
 }
 .carrucel-pages{
     position: relative;
 }
 .carrucel-pages h1{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     position: absolute;
-    bottom: 15rem;
+    bottom: 2rem;
+    width: 100vw;
+    text-align: center;
+    color: #D90368;
+    font-size: 6vw;
+    z-index:1;
+    text-shadow: 1px 1px 2px black, 2px 2px 2px rgb(163, 60, 0);
+}
+.carousel-item{
+    transition: transform 1.6s ease-in-out;
 }
 /* ------------------------------------cards-------------------------------- */
 .cards{
@@ -290,13 +302,6 @@ footer{
     .form-contact{
         align-items: center;
     }
-    .carrucel-pages{
-        justify-content: space-evenly;
-    }
-    .carrucel-pages h1{
-        position: relative;
-        margin: 0;
-    }
     .table-stats{
         font-size: 0.7rem;
     }
@@ -329,5 +334,12 @@ footer{
         margin-top: 5vw;
         background-color: #19182500;
         box-shadow: none;
+    }
+    .carrucel-pages h1{
+        font-size:calc(40px + 1vw);
+        bottom: 2rem;
+    }
+    .carousel-inner img{
+        min-height: 63vw;
     }
 }
