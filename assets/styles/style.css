@@ -15,7 +15,7 @@
         border-bottom: 1px solid rgba(255, 255, 255, 0.356);
         margin-left: 1vw;
         border-radius: 0.3rem;
-        height: 1.5rem;
+        height: 3rem;
         text-align: center;
         font-size: 1.1rem;
     }
@@ -24,6 +24,7 @@
     }
     .nav-link{
         color: white;
+        font-size: 1rem;
     }
     .nav-link:hover{
         color: #D90368;
@@ -34,6 +35,7 @@
     }
     #nav-active a{
         color: #D90368;
+        font-size: 1.4rem;
     }
     .second-a span{
         order: 1;
@@ -54,16 +56,24 @@ body{
     min-height: 100vh;
 }
 .categories{
-    width: 50vw;
+    width: 80vw;
 }
 .categories-search{
     padding: 1.5rem 3rem;
 }
 .categories label{
     color: white;
+    margin-left: 1rem;
+}
+.form-check-inline{
+    width: 10rem;
+    margin-bottom: 0.5rem;
 }
 .categories input:checked ~ label{
     color: #295CE0;
+}
+.categories-offCanvas label{
+    margin-left: 1rem;
 }
 .carousel-inner{
     overflow: hidden;
@@ -100,9 +110,7 @@ body{
     flex-wrap: wrap;
 }
 .card{
-    background-color: transparent!important;
     width: 20rem;
-    height: 25rem;
     border: none;
     margin: 2rem;
     box-shadow: rgb(0, 0, 0) 0px 22px 70px 4px;
@@ -121,6 +129,9 @@ body{
     justify-content: space-evenly;
     align-items: center;
     height: 4rem;
+}
+.footer-card p{
+    margin-top: 1rem;
 }
 /* --------------------------FORM-------------------------------- */
 .form-contact{
@@ -144,6 +155,7 @@ body{
     width: 80vw;
     color: white;
     box-shadow: rgb(0, 0, 0) 0px 22px 70px 4px;
+    margin-bottom: 2rem;
 }
 .table-stats table{
     border: 1px solid white;
@@ -189,10 +201,6 @@ body{
     text-align: center;
     box-shadow: rgb(0, 0, 0) 0px 22px 70px 4px;
 }
-
-
-
-
 
 footer{
     background-color: #343a40;
@@ -256,7 +264,7 @@ footer{
         width: auto !important;
     }
 }
-
+/* ----------------------------------------MOVILE------------------------------ */
 @media screen and (max-width:767px) {
     .navbar-nav{
         color: #FFFFFF8C;
@@ -285,6 +293,7 @@ footer{
     }
     .card{
         padding-bottom: 7vw;
+        width: 20rem !important;
     }
     .footer-card{
         flex-direction: column;
@@ -341,5 +350,14 @@ footer{
     }
     .carousel-inner img{
         min-height: 63vw;
+    }
+}
+@media screen and (max-width:424px) {
+    .card{
+        margin: 0;
+        margin-bottom: 2rem;
+    }
+    .cards{
+        padding: 0 10px;
     }
 }
