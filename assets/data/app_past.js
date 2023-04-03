@@ -198,10 +198,12 @@ function filterEvents(events, currentDate){
         }
 }
 function printCard(events, conteinerCards) {
+    const fragment = document.createDocumentFragment()
         for(const event of events) {
             //console.log(event)
-            conteinerCards.appendChild(createCard(event));
+            fragment.appendChild(createCard(event));
     }
+    conteinerCards.appendChild(fragment);
 }
 function createCard(event){
     const divCard = document.createElement("div") 
