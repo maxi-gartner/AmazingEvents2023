@@ -55,19 +55,23 @@ body{
     background-color: #191825;
     min-height: 100vh;
 }
+
+/* -------------------------------categories------------------------------- */
 .categories{
     width: 80vw;
+    display: flex;
+    flex-wrap: wrap;
 }
 .categories-search{
     padding: 1.5rem 3rem;
 }
 .categories label{
     color: white;
-    margin-left: 1rem;
+    margin-left: 10px;
 }
 .form-check-inline{
-    width: 10rem;
     margin-bottom: 0.5rem;
+    width: 8.7rem;
 }
 .categories input:checked ~ label{
     color: #295CE0;
@@ -75,6 +79,9 @@ body{
 .categories-offCanvas label{
     margin-left: 1rem;
 }
+
+/* ----------------------------------------CAROUSEL -------------------------------- */
+
 .carousel-inner{
     overflow: hidden;
     height: 25vw;
