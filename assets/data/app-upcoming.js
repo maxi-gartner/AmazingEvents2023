@@ -232,13 +232,17 @@ function createCard(event){
     const pFooter = document.createElement("p")
     pFooter.textContent = `Price: $${event.price}`
 
+    const detailsCard = document.createElement("a")
+    detailsCard.setAttribute("href", "./Details.html")
+
     const buttonCard = document.createElement("button")
     buttonCard.textContent = "More information"
     buttonCard.type = "button"
     buttonCard.classList.add("btn")
     buttonCard.classList.add("btn-secondary")
 
-    footerCard.append(pFooter, buttonCard)
+    detailsCard.appendChild(buttonCard)
+    footerCard.append(pFooter, detailsCard)
     divCardBody.append(h3, p)
     divCard.append(imgCard, divCardBody, footerCard)
     
