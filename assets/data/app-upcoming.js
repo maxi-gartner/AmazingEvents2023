@@ -162,18 +162,22 @@ const events = data.eventos
 const currentDate = data.fechaActual
 const eventsFilter= []
 const categories = []
+const categoriesChecked = [];
 
 //console.log(eventsFilter)
 
 const conteinerCards = document.getElementById("cards")
 const conteinerCategories = document.querySelector('.categories');
 const categoryCanvas = document.getElementById("categoryCanvas")
+const categoriesContainer = document.getElementById("categories");
 //console.log(conteinerCards)
 
 filterEvents(events, currentDate)
 printCard(eventsFilter, conteinerCards)
 filterCategories(events, categories)
 printCategories(categories, conteinerCategories)
+captureCheckboxCheked(categoriesChecked);
+filterCategoriesChecked(events, categoriesChecked, conteinerCards)
 
 
 function filterEvents(events, currentDate){
@@ -282,4 +286,42 @@ function createCategories(categories){
     //console.log(div)
     return div
 }
-//console.log("funciona al final")
+function captureCheckboxCheked(arrayCategoriesChecked){
+    const checkboxs = document.querySelectorAll('.form-check-input')
+    //console.log(checkboxs)
+    checkboxs.forEach(checkbox => {
+        checkbox.addEventListener('click', e =>{
+            //console.log(e.target.checked)
+            if(checkbox.checked){
+                //console.log(e.target.id)
+                arrayCategoriesChecked.push(checkbox.id)
+            }else{
+                //console.log(`input ${checkbox.id} no esta chekeado   `);
+                const indice = arrayCategoriesChecked.indexOf(checkbox.id);
+                //console.log(indice);
+                arrayCategoriesChecked.splice(indice, 1)
+                conteinerCards.textContent = ``
+            }
+        })
+    });
+}
+function filterCategoriesChecked(events, arrayCategoriesChecked, conteinerCards){
+    categoriesContainer.addEventListener('change', e =>{
+        const eventsFilter = [];
+        if(arrayCategoriesChecked.length > 0){
+            arrayCategoriesChecked.forEach(category => {
+                events.filter(event => {
+                    if(event.category.replace(/\s/g,'').indexOf(category) !== -1){
+                        eventsFilter.push(event)
+                    }
+                })
+                conteinerCards.textContent = ``
+                printCard(eventsFilter, conteinerCards)
+                console.log(eventsFilter)
+            });
+        }else{
+            printCard(events, conteinerCards)
+        }
+    })
+    //console.log(events)
+}

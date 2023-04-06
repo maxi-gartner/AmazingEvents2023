@@ -295,5 +295,5 @@ function filterCategoriesChecked(events, arrayCategoriesChecked, conteinerCards)
             printCard(events, conteinerCards)
         }
     })
-    console.log(events)
+    //console.log(events)
 }
