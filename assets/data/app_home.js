@@ -156,24 +156,22 @@ const data={
             "price":250
         }
     ]
-    }
+    };
 
-const events = data.eventos
-//console.log(events)
-const categories = []
-//console.log(categories)
+const events = data.eventos;
+const categories = [];
+const categoriesChecked = [];
 
-const conteinerCards = document.getElementById("cards")
-//console.log(conteinerCards)
+const conteinerCards = document.getElementById("cards");
 const conteinerCategories = document.querySelector('.categories');
-const categoryCanvas = document.getElementById("categoryCanvas")
-//console.log(conteinerCategories)
+const categoryCanvas = document.getElementById("categoryCanvas");
+const categoriesContainer = document.getElementById("categories");
 
-
-printCard(events, conteinerCards)
-filterCategories(events, categories)
-printCategories(categories, conteinerCategories)
-
+printCard(events, conteinerCards);
+filterCategories(events, categories);
+printCategories(categories, conteinerCategories);
+captureCheckboxCheked(categoriesChecked);
+filterCategoriesChecked(events, categoriesChecked, conteinerCards)
 
 function printCard(events, conteinerCards) {
     const fragment = document.createDocumentFragment()
@@ -260,15 +258,42 @@ function createCategories(categories){
     //console.log(div)
     return div
 }
-/* ---------------card------------------------------------------------
-            <div class="card bg-dark">
-                <img class="card-img-top" src="./assets/images/books.jpg" alt="Card image cap">
-                <div class="card-body">
-                    <h3 class="text-center">Title</h3>
-                    <p class="card-text">Text description lorem</p>
-                </div>
-                <div class="footer-card">
-                    <p>Price : 0000</p>
-                    <button type="button" class="btn btn-secondary">More Information</button>
-                </div>
-            </div> */
+function captureCheckboxCheked(arrayCategoriesChecked){
+    const checkboxs = document.querySelectorAll('.form-check-input')
+    //console.log(checkboxs)
+    checkboxs.forEach(checkbox => {
+        checkbox.addEventListener('click', e =>{
+            //console.log(e.target.checked)
+            if(checkbox.checked){
+                //console.log(e.target.id)
+                arrayCategoriesChecked.push(checkbox.id)
+            }else{
+                //console.log(`input ${checkbox.id} no esta chekeado   `);
+                const indice = arrayCategoriesChecked.indexOf(checkbox.id);
+                //console.log(indice);
+                arrayCategoriesChecked.splice(indice, 1)
+                conteinerCards.textContent = ``
+            }
+        })
+    });
+}
+function filterCategoriesChecked(events, arrayCategoriesChecked, conteinerCards){
+    categoriesContainer.addEventListener('change', e =>{
+        const eventsFilter = [];
+        if(arrayCategoriesChecked.length > 0){
+            arrayCategoriesChecked.forEach(category => {
+                events.filter(event => {
+                    if(event.category.replace(/\s/g,'').indexOf(category) !== -1){
+                        eventsFilter.push(event)
+                    }
+                })
+                conteinerCards.textContent = ``
+                printCard(eventsFilter, conteinerCards)
+                console.log(eventsFilter)
+            });
+        }else{
+            printCard(events, conteinerCards)
+        }
+    })
+    console.log(events)
+}
