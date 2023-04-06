@@ -161,17 +161,22 @@ const data={
 const events = data.eventos;
 const categories = [];
 const categoriesChecked = [];
+const eventsFilter = [];
 
-const conteinerCards = document.getElementById("cards");
+const $ = id => document.getElementById(id)
+const conteinerCards = $("cards");
 const conteinerCategories = document.querySelector('.categories');
-const categoryCanvas = document.getElementById("categoryCanvas");
-const categoriesContainer = document.getElementById("categories");
+const categoryCanvas = $("categoryCanvas");
+const categoriesContainer = $("categories");
+const search = $("search");
+console.log(events, eventsFilter)
 
 printCard(events, conteinerCards);
 filterCategories(events, categories);
 printCategories(categories, conteinerCategories);
 captureCheckboxCheked(categoriesChecked);
 filterCategoriesChecked(events, categoriesChecked, conteinerCards)
+filterSearch(events, eventsFilter, categoriesChecked)
 
 function printCard(events, conteinerCards) {
     const fragment = document.createDocumentFragment()
@@ -273,13 +278,14 @@ function captureCheckboxCheked(arrayCategoriesChecked){
                 //console.log(indice);
                 arrayCategoriesChecked.splice(indice, 1)
                 conteinerCards.textContent = ``
+                printCard(events, conteinerCards)
             }
         })
     });
 }
 function filterCategoriesChecked(events, arrayCategoriesChecked, conteinerCards){
     categoriesContainer.addEventListener('change', e =>{
-        const eventsFilter = [];
+        eventsFilter.length = 0;
         if(arrayCategoriesChecked.length > 0){
             arrayCategoriesChecked.forEach(category => {
                 events.filter(event => {
@@ -289,11 +295,37 @@ function filterCategoriesChecked(events, arrayCategoriesChecked, conteinerCards)
                 })
                 conteinerCards.textContent = ``
                 printCard(eventsFilter, conteinerCards)
-                console.log(eventsFilter)
+                //console.log(eventsFilter)
             });
         }else{
             printCard(events, conteinerCards)
         }
     })
     //console.log(events)
+}
+function filterSearch(events, eventsFilter, categoriesChecked){
+    search.addEventListener('keyup', e =>{
+        if(categoriesChecked.length === 0){
+            e.preventDefault();
+            const searchEvent = [];
+            console.log(categoriesChecked)
+                events.filter(event => {
+                    if(event.name.toLowerCase().indexOf(search.value.toLowerCase()) !== -1){
+                        searchEvent.push(event)
+                    }
+                })
+                conteinerCards.textContent = ``
+                printCard(searchEvent, conteinerCards)
+        }else{
+            e.preventDefault();
+            const searchEventCheked = [];
+                eventsFilter.filter(event => {
+                    if(event.name.toLowerCase().indexOf(search.value.toLowerCase()) !== -1){
+                        searchEventCheked.push(event)
+                    }
+                })
+            conteinerCards.textContent = ``
+            printCard(searchEventCheked, conteinerCards)
+        }
+    })
 }

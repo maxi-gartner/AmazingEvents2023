@@ -71,7 +71,13 @@ body{
 }
 .form-check-inline{
     margin-bottom: 0.5rem;
-    width: 8.7rem;
+    width: 9.5rem;
+    border-bottom: 1px solid white;
+    padding: 5px;
+    text-align: center;
+    border-radius: 20px 20px 15px 15px;
+    background: linear-gradient(#191825, #000000);
+    /* background-color: #212429; */
 }
 .categories input:checked ~ label{
     color: #295CE0;

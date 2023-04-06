@@ -163,11 +163,14 @@ const currentDate = data.fechaActual
 const eventsFilter= []
 const categories = []
 const categoriesChecked = [];
+const eventsFilterChecked = [];
 
-const conteinerCards = document.getElementById("cards")
+const $ = id => document.getElementById(id)
+const conteinerCards = $("cards")
 const conteinerCategories = document.querySelector('.categories');
-const categoryCanvas = document.getElementById("categoryCanvas")
-const categoriesContainer = document.getElementById("categories");
+const categoryCanvas = $("categoryCanvas")
+const categoriesContainer = $("categories");
+const search = $("search");
 
 filterEvents(events, currentDate)
 printCard(eventsFilter, conteinerCards)
@@ -175,6 +178,7 @@ filterCategories(events, categories)
 printCategories(categories, conteinerCategories)
 captureCheckboxCheked(categoriesChecked);
 filterCategoriesChecked(events, categoriesChecked, conteinerCards)
+filterSearch(events, eventsFilter, categoriesChecked)
 
 
 function filterEvents(events, currentDate){
@@ -304,21 +308,47 @@ function captureCheckboxCheked(arrayCategoriesChecked){
 }
 function filterCategoriesChecked(events, arrayCategoriesChecked, conteinerCards){
     categoriesContainer.addEventListener('change', e =>{
-        const eventsFilter = [];
+        eventsFilterChecked.length = 0;
         if(arrayCategoriesChecked.length > 0){
             arrayCategoriesChecked.forEach(category => {
                 events.filter(event => {
                     if(event.category.replace(/\s/g,'').indexOf(category) !== -1){
-                        eventsFilter.push(event)
+                        eventsFilterChecked.push(event)
                     }
                 })
                 conteinerCards.textContent = ``
-                printCard(eventsFilter, conteinerCards)
-                console.log(eventsFilter)
+                printCard(eventsFilterChecked, conteinerCards)
+                console.log(eventsFilterChecked)
             });
         }else{
             printCard(events, conteinerCards)
         }
     })
     //console.log(events)
+}
+function filterSearch(events, eventsFilter, categoriesChecked){
+    search.addEventListener('keyup', e =>{
+        if(categoriesChecked.length === 0){
+            e.preventDefault();
+            const searchEvent = [];
+            console.log(categoriesChecked)
+                events.filter(event => {
+                    if(event.name.toLowerCase().indexOf(search.value.toLowerCase()) !== -1){
+                        searchEvent.push(event)
+                    }
+                })
+                conteinerCards.textContent = ``
+                printCard(searchEvent, conteinerCards)
+        }else{
+            e.preventDefault();
+            const searchEventCheked = [];
+                eventsFilter.filter(event => {
+                    if(event.name.toLowerCase().indexOf(search.value.toLowerCase()) !== -1){
+                        searchEventCheked.push(event)
+                    }
+                })
+            conteinerCards.textContent = ``
+            printCard(searchEventCheked, conteinerCards)
+        }
+    })
 }
