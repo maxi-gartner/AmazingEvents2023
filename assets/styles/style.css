@@ -201,7 +201,7 @@ body{
 .card-details{
     display: flex;
     justify-content: space-between;
-    margin: 10vw;
+    margin: 2vw 10vw;
     padding: 2vw;
     box-shadow: rgb(0, 0, 0) 0px 22px 70px 4px;
     width: 80vw;
@@ -209,7 +209,6 @@ body{
 .card-details img,
 .card-details .description{
     width: 37vw;
-    height: 25vw;
     object-fit: cover;
     text-align: center;
     box-shadow: rgb(0, 0, 0) 0px 22px 70px 4px;
@@ -287,9 +286,15 @@ footer{
         flex-direction: column;
         color: #FFFFFF8C;
     }
+    .form-check-inline{
+        background: rgba(0, 0, 0, 0.349);
+    }
     .categories-offCanvas div,
     .categories-offCanvas h2{
         margin-bottom: 2vw;
+        width: 15rem;
+        text-align: start;
+        padding-left: 20px ;
     }
     .categories-offCanvas h2{
         margin-top: 4vw;

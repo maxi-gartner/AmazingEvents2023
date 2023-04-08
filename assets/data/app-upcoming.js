@@ -1,4 +1,4 @@
-const data={
+/* const data={
     "fechaActual": "2022-01-01",
     "eventos": [
         {
@@ -178,8 +178,9 @@ const search = $("search");
 filterEvents(events, currentDate)
 printCard(eventsFilter, conteinerCards)
 filterCategories(events, categories)
+printCategories(categories, categoryCanvas)
 printCategories(categories, conteinerCategories)
-captureCheckboxCheked(categoriesChecked);
+captureCheckboxCheked(categoriesChecked, '.form-check-input');
 filterCategoriesChecked(events, categoriesChecked, conteinerCards)
 filterSearch(events, eventsFilter, categoriesChecked)
 
@@ -221,7 +222,7 @@ function createCard(event){
     const imgCard = document.createElement("img")
     imgCard.src = event.image
     imgCard.classList.add("card-img-top")
-    imgCard.alt = "alt de prueba"
+    imgCard.alt = `img ${event.name}`
 
     const divCardBody = document.createElement("div")
     divCardBody.classList.add("card-body")
@@ -241,7 +242,7 @@ function createCard(event){
     pFooter.textContent = `Price: $${event.price}`
 
     const detailsCard = document.createElement("a")
-    detailsCard.setAttribute("href", "./Details.html")
+    detailsCard.setAttribute("href", `./assets/pages/Details.html?event=${event.name.replace(/\s/g,'')}`)
 
     const buttonCard = document.createElement("button")
     buttonCard.textContent = "More information"
@@ -263,12 +264,12 @@ function filterCategories(events, arrayCategories){
         }
     }
 }
-function printCategories(categories){
+function printCategories(categories, contenedor){
+    const fragment = document.createDocumentFragment()
     for(const category of categories){
-        //console.log(category)
-        conteinerCategories.appendChild(createCategories(category))
-        categoryCanvas.appendChild(createCategories(category))
+        fragment.appendChild(createCategories(category))
     }
+    contenedor.appendChild(fragment)
 }
 function createCategories(categories){
     const div = document.createElement('div');
@@ -290,8 +291,8 @@ function createCategories(categories){
     //console.log(div)
     return div
 }
-function captureCheckboxCheked(arrayCategoriesChecked){
-    const checkboxs = document.querySelectorAll('.form-check-input')
+function captureCheckboxCheked(arrayCategoriesChecked, conteinerCheckbox){
+    const checkboxs = document.querySelectorAll(conteinerCheckbox)
     //console.log(checkboxs)
     checkboxs.forEach(checkbox => {
         checkbox.addEventListener('click', e =>{
@@ -354,4 +355,4 @@ function filterSearch(events, eventsFilter, categoriesChecked){
             printCard(searchEventCheked, conteinerCards)
         }
     })
-}
+} */

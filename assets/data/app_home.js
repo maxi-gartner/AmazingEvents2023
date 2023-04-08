@@ -162,6 +162,8 @@ const events = data.eventos;
 const categories = [];
 const categoriesChecked = [];
 const eventsFilter = [];
+const searchEventCheked = [];
+
 
 const $ = id => document.getElementById(id)
 const conteinerCards = $("cards");
@@ -169,19 +171,25 @@ const conteinerCategories = document.querySelector('.categories');
 const categoryCanvas = $("categoryCanvas");
 const categoriesContainer = $("categories");
 const search = $("search");
-console.log(events, eventsFilter)
+const conteinerFilters = $("conteiner-filters")
+const buttonCategories = $("button-categories")
+
+//console.log(events, eventsFilter)
 
 printCard(events, conteinerCards);
-filterCategories(events, categories);
-printCategories(categories, conteinerCategories);
+categoriesFilter(events, categories);
+categoriesPrintMobileOrPC(categories);
+categoriesActiveMediaQuery(categories)
+//categoriesUncheck()
+mixCheck()
 captureCheckboxCheked(categoriesChecked);
-filterCategoriesChecked(events, categoriesChecked, conteinerCards)
-filterSearch(events, eventsFilter, categoriesChecked)
+filterCategoriesChecked(events, categoriesChecked, conteinerCards, searchEventCheked, conteinerFilters)
+filterCategoriesChecked(events, categoriesChecked, conteinerCards, searchEventCheked, categoryCanvas)
+filterSearch(events, eventsFilter, categoriesChecked, searchEventCheked)
 
 function printCard(events, conteinerCards) {
     const fragment = document.createDocumentFragment()
-        for(const event of events) {
-            //console.log(event)
+        for(const event of events){
             fragment.appendChild(createCard(event));
     }
     conteinerCards.appendChild(fragment);
@@ -194,7 +202,7 @@ function createCard(event){
     const imgCard = document.createElement("img")
     imgCard.src = event.image
     imgCard.classList.add("card-img-top")
-    imgCard.alt = "alt de prueba"
+    imgCard.alt = `img ${event.name}`
 
     const divCardBody = document.createElement("div")
     divCardBody.classList.add("card-body")
@@ -214,7 +222,7 @@ function createCard(event){
     pFooter.textContent = `Price: $${event.price}`
 
     const detailsCard = document.createElement("a")
-    detailsCard.setAttribute("href", "./assets/pages/Details.html")
+    detailsCard.setAttribute("href", `./assets/pages/Details.html?event=${event.name.replace(/\s/g,'')}`)
 
     const buttonCard = document.createElement("button")
     buttonCard.textContent = "More information"
@@ -229,21 +237,111 @@ function createCard(event){
     
     return divCard
 }
-function filterCategories(events, arrayCategories){
+function categoriesFilter(events, arrayCategories){
     for(let event of events){
         if(arrayCategories.indexOf(event.category) === -1){
             arrayCategories.push(event.category)
         }
     }
 }
-function printCategories(categories){
-    for(const category of categories){
-        //console.log(category)
-        conteinerCategories.appendChild(createCategories(category))
-        categoryCanvas.appendChild(createCategories(category))
+function categoriesPrintMobileOrPC(categories){
+    let windowsSize = window.innerWidth
+    console.log(windowsSize)
+    if(windowsSize < 767){
+        const fragment = document.createDocumentFragment()
+        categories.forEach(category => fragment.appendChild(categoriesCreate(category)))
+            categoryCanvas.appendChild(fragment)
+        //console.log("usando el if")
+    }else{
+        const fragment = document.createDocumentFragment()
+        categories.forEach(category => fragment.appendChild(categoriesCreate(category)))
+            categoriesContainer.appendChild(fragment)
+        //console.log("usando el else")
     }
+
+    buttonCategories.addEventListener('change', (e) => console.log(e.target));
+    const fragment = document.createDocumentFragment()
+    categories.forEach(category => fragment.appendChild(categoriesCreate(category)))
 }
-function createCategories(categories){
+function categoriesActiveMediaQuery(categories){
+    const mql = window.matchMedia("(max-width:767px)");
+
+    function screenTest(e) {
+        if (e.matches) {
+                /* location.reload()
+                console.log("Mobile activado")
+                categoriesContainer.textContent = '';
+                const fragment = document.createDocumentFragment()
+                categories.forEach(category => fragment.appendChild(categoriesCreate(category)))
+                categoryCanvas.appendChild(fragment) */
+            } else {
+                /* location.reload()
+                console.log("Mobile desactivado")
+                categoryCanvas.textContent = '';
+                const fragment = document.createDocumentFragment()
+                categories.forEach(category => fragment.appendChild(categoriesCreate(category)))
+                categoriesContainer.appendChild(fragment) */
+            }
+        }
+        mql.addEventListener("change", screenTest);
+        const fragment = document.createDocumentFragment()
+                categories.forEach(category => fragment.appendChild(categoriesCreate(category)))
+                categoryCanvas.appendChild(fragment)
+                categoriesContainer.appendChild(fragment)
+}
+/* function categoriesUncheck(){
+    const mql = window.matchMedia("(max-width:767px)");
+
+    function screenTest(e) {
+        if (e.matches) {
+                location.reload()
+                console.log("Mobile activado en Uncheck")
+                const checkboxCategories = document.querySelectorAll('.form-check-input')
+                    checkboxCategories.forEach(function(checkElement) {
+                        checkElement.checked = false;
+                    });
+                    conteinerCards.textContent = ''
+                    printCard(events, conteinerCards)
+            } else {
+                location.reload()
+                console.log("Mobile desactivado en Uncheck")
+                const checkboxCategories = document.querySelectorAll('.form-check-input')
+                    checkboxCategories.forEach(function(checkElement) {
+                        checkElement.checked = false;
+                    });
+                    conteinerCards.textContent = ''
+                    printCard(events, conteinerCards)
+            }
+        }
+        mql.addEventListener("change", screenTest);
+} */
+function mixCheck(){
+    const allCheckbox = document.querySelectorAll('.form-check-input')
+    allCheckbox.forEach(checkbox => {
+        checkbox.addEventListener('click', e =>{
+            //console.log(e.target.checked)
+            if(checkbox.checked){
+                console.log(e.target.id)
+                allCheckbox.forEach(function(checkElement) {
+                    //console.log(checkElement.id)
+                    if(checkElement.id === e.target.id){
+                        checkElement.checked = true;
+                    }
+                });
+            }else{
+                console.log(e.target.id)
+                allCheckbox.forEach(function(checkElement) {
+                    //console.log(checkElement.id)
+                    if(checkElement.id === e.target.id){
+                        checkElement.checked = false;
+                    }
+                });
+            }
+        })
+    })
+}
+function categoriesCreate(categories){
+    const categoryReplace = categories.replace(/\s/g,'')
     const div = document.createElement('div');
     div.className = 'form-check'
     div.className = 'form-check-inline'
@@ -251,12 +349,12 @@ function createCategories(categories){
     const input = document.createElement('input');
     input.className = 'form-check-input'
     input.type = 'checkbox'
-    input.id = categories.replace(/\s/g,'')
+    input.id = categoryReplace
     input.value = `category${categories.replace(/\s/g,'')}`
 
     const label = document.createElement('label');
     label.className = 'form-check-label'
-    label.setAttribute('for', categories.replace(/\s/g,''))
+    label.setAttribute('for', categoryReplace)
     label.textContent = categories
 
     div.append(input, label)
@@ -278,54 +376,84 @@ function captureCheckboxCheked(arrayCategoriesChecked){
                 //console.log(indice);
                 arrayCategoriesChecked.splice(indice, 1)
                 conteinerCards.textContent = ``
-                printCard(events, conteinerCards)
             }
         })
     });
 }
-function filterCategoriesChecked(events, arrayCategoriesChecked, conteinerCards){
-    categoriesContainer.addEventListener('change', e =>{
-        eventsFilter.length = 0;
-        if(arrayCategoriesChecked.length > 0){
-            arrayCategoriesChecked.forEach(category => {
-                events.filter(event => {
-                    if(event.category.replace(/\s/g,'').indexOf(category) !== -1){
-                        eventsFilter.push(event)
-                    }
-                })
-                conteinerCards.textContent = ``
-                printCard(eventsFilter, conteinerCards)
-                //console.log(eventsFilter)
-            });
-        }else{
-            printCard(events, conteinerCards)
-        }
+function filterCategoriesChecked(events, arrayCategoriesChecked, conteinerCards, searchEventCheked, conteinerEvent){
+    conteinerEvent.addEventListener('change', e =>{
+        //console.log("searchEventCheked.length", searchEventCheked.length)
+        if(searchEventCheked.length === 0){ // si no hay nada en search
+            //console.log("trabajando SINNN datos en search")
+            eventsFilter.length = 0;
+            if(arrayCategoriesChecked.length > 0){
+                arrayCategoriesChecked.forEach(category => {
+                    events.filter(event => {
+                        if(event.category.replace(/\s/g,'').indexOf(category) !== -1){
+                            eventsFilter.push(event)
+                        }
+                    })
+                    conteinerCards.textContent = ``
+                    printCard(eventsFilter, conteinerCards)
+                    //console.log(eventsFilter)
+                });
+            }else{
+                printCard(events, conteinerCards)
+            }
+        }else{ //si hay algo en search
+            console.log("trabajando con datos en search")
+            eventsFilter.length = 0;
+            if(arrayCategoriesChecked.length !== 0){
+                arrayCategoriesChecked.forEach(category => {
+                    searchEventCheked.filter(event => {
+                        if(event.category.replace(/\s/g,'').indexOf(category) !== -1){
+                            eventsFilter.push(event)
+                        }
+                    })
+                    conteinerCards.textContent = ``
+                    printCard(eventsFilter, conteinerCards)
+                    //console.log(eventsFilter)
+                });
+            }else{
+                    printCard(searchEventCheked, conteinerCards)
+                }
+            }
     })
     //console.log(events)
 }
-function filterSearch(events, eventsFilter, categoriesChecked){
+function filterSearch(events, eventsFilter, categoriesChecked, searchEventCheked){
     search.addEventListener('keyup', e =>{
-        if(categoriesChecked.length === 0){
-            e.preventDefault();
-            const searchEvent = [];
-            console.log(categoriesChecked)
-                events.filter(event => {
-                    if(event.name.toLowerCase().indexOf(search.value.toLowerCase()) !== -1){
-                        searchEvent.push(event)
-                    }
-                })
+        if(search.value.length > 0){// si hay algun valor ingresado en el search
+            if(categoriesChecked.length === 0){//ninguna categoria checkeada
+                searchEventCheked.length = 0
+                e.preventDefault();
+                    events.filter(event => {
+                        if(event.name.toLowerCase().includes(search.value.toLowerCase())){
+                            searchEventCheked.push(event)
+                        }
+                    })
+                    conteinerCards.textContent = ``
+                    printCard(searchEventCheked, conteinerCards)
+            }else{
+                searchEventCheked.length = 0
+                e.preventDefault();
+                    eventsFilter.filter(event => {
+                        if(event.name.toLowerCase().includes(search.value.toLowerCase())){
+                            searchEventCheked.push(event)
+                        }
+                    })
                 conteinerCards.textContent = ``
-                printCard(searchEvent, conteinerCards)
+                printCard(searchEventCheked, conteinerCards)
+            }
+            console.log(events)
+            console.log(searchEventCheked)
         }else{
-            e.preventDefault();
-            const searchEventCheked = [];
-                eventsFilter.filter(event => {
-                    if(event.name.toLowerCase().indexOf(search.value.toLowerCase()) !== -1){
-                        searchEventCheked.push(event)
-                    }
-                })
             conteinerCards.textContent = ``
-            printCard(searchEventCheked, conteinerCards)
+            
+            categoriesChecked.length = 0;
+            eventsFilter.length = 0;
+            searchEventCheked.length = 0;
+            printCard(events, conteinerCards)
         }
     })
 }

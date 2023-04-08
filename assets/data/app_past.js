@@ -1,4 +1,4 @@
-const data={
+/* const data={
     "fechaActual": "2022-01-01",
     "eventos": [
         {
@@ -218,7 +218,7 @@ function createCard(event){
     const imgCard = document.createElement("img")
     imgCard.src = event.image
     imgCard.classList.add("card-img-top")
-    imgCard.alt = "alt de prueba"
+    imgCard.alt = `img ${event.name}`
 
     const divCardBody = document.createElement("div")
     divCardBody.classList.add("card-body")
@@ -238,7 +238,7 @@ function createCard(event){
     pFooter.textContent = `Price: $${event.price}`
 
     const detailsCard = document.createElement("a")
-    detailsCard.setAttribute("href", "./Details.html")
+    detailsCard.setAttribute("href", `./assets/pages/Details.html?event=${event.name.replace(/\s/g,'')}`)
 
     const buttonCard = document.createElement("button")
     buttonCard.textContent = "More information"
@@ -261,11 +261,15 @@ function filterCategories(events, arrayCategories){
     }
 }
 function printCategories(categories){
+    const fragment = document.createDocumentFragment()
+    const fragmentCanvas = document.createDocumentFragment()
     for(const category of categories){
         //console.log(category)
-        conteinerCategories.appendChild(createCategories(category))
-        categoryCanvas.appendChild(createCategories(category))
+        fragment.appendChild(createCategories(category))
+        fragmentCanvas.appendChild(createCategories(category))
     }
+    categoryCanvas.appendChild(fragmentCanvas)
+    conteinerCategories.appendChild(fragment)
 }
 function createCategories(categories){
     const div = document.createElement('div');
@@ -351,4 +355,4 @@ function filterSearch(events, eventsFilter, categoriesChecked){
             printCard(searchEventCheked, conteinerCards)
         }
     })
-}
+} */
