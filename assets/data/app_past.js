@@ -1,4 +1,4 @@
-/* const data={
+const data={
     "fechaActual": "2022-01-01",
     "eventos": [
         {
@@ -158,30 +158,35 @@
     ]
     }
 
-const events = data.eventos
+const eventsFilter = data.eventos
 const currentDate = data.fechaActual
-const eventsFilter= []
+const events= []
 const categories = []
 const categoriesChecked = [];
-const eventsFilterChecked = [];
+const searchEventCheked = [];
 
 const $ = id => document.getElementById(id)
-const conteinerCards = $("cards")
+const conteinerCards = $("cards");
 const conteinerCategories = document.querySelector('.categories');
-const categoryCanvas = $("categoryCanvas")
+const categoryCanvas = $("categoryCanvas");
 const categoriesContainer = $("categories");
 const search = $("search");
+const conteinerFilters = $("conteiner-filters")
 
-filterEvents(events, currentDate)
-printCard(eventsFilter, conteinerCards)
-filterCategories(events, categories)
-printCategories(categories, conteinerCategories)
+filterEvents(eventsFilter, currentDate)
+printCard(events, conteinerCards);
+categoriesFilter(events, categories);
+categoriesPrint(categories);
+categoriesActiveMediaQuery(categories)
+mixCheck()
 captureCheckboxCheked(categoriesChecked);
-filterCategoriesChecked(events, categoriesChecked, conteinerCards)
-filterSearch(events, eventsFilter, categoriesChecked)
+filterCategoriesChecked(events, categoriesChecked, conteinerCards, searchEventCheked, conteinerFilters)
+filterCategoriesChecked(events, categoriesChecked, conteinerCards, searchEventCheked, categoryCanvas)
+colorChecked(categoriesContainer)
+filterSearch(events, eventsFilter, categoriesChecked, searchEventCheked)
 
 
-function filterEvents(events, currentDate){
+function filterEvents(eventsFilter, currentDate){
         //console.log(currentDate)
     const currentDate_split = currentDate.split("-") // split separa la fecha en formato de array
         //console.log(currentDate_split)
@@ -190,7 +195,7 @@ function filterEvents(events, currentDate){
     const currentDate_getTime = currentDate_parsed.getTime(); // devuelve el valor numérico correspondiente a la hora para la fecha especificada según la hora universal.
         //console.log(currentDate_getTime)
 
-        for(const event of events){
+        for(const event of eventsFilter){
             const date_event = event.date
             const date_event_split = date_event.split("-")
             const date_event_parsed = new Date(date_event_split[0],date_event_split[1]-1,date_event_split[2])
@@ -198,14 +203,13 @@ function filterEvents(events, currentDate){
             //console.log(date_event_getTime)
 
             if(currentDate_getTime > date_event_getTime){
-                eventsFilter.push(event)
+                events.push(event)
             }
         }
 }
 function printCard(events, conteinerCards) {
     const fragment = document.createDocumentFragment()
-        for(const event of events) {
-            //console.log(event)
+        for(const event of events){
             fragment.appendChild(createCard(event));
     }
     conteinerCards.appendChild(fragment);
@@ -253,43 +257,104 @@ function createCard(event){
     
     return divCard
 }
-function filterCategories(events, arrayCategories){
+function createCardWithoutResults(conteinerCards){
+    const fragment = document.createDocumentFragment()
+
+    const divCard = document.createElement("div") 
+    divCard.classList.add("card")
+    divCard.classList.add("card-without-results")
+    divCard.classList.add("bg-dark")
+
+    const imgCard = document.createElement("img")
+    imgCard.src = "https://www.tecnozero.com/wp-content/uploads/2019/10/que-es-edr-en-informatica.png"
+    imgCard.classList.add("card-img-top-without")
+    imgCard.alt = `img without results`
+
+    const divCardBody = document.createElement("div")
+    divCardBody.classList.add("card-body")
+
+    const h3 = document.createElement("h3")
+    h3.textContent = "Without Results!!"
+    h3.classList.add("text-center")
+
+    const p = document.createElement("p")
+    p.textContent = "We have no results for this search"
+    h3.classList.add("card-text")
+    
+    const footerCard = document.createElement("div")
+    footerCard.classList.add("footer-card")
+
+    divCardBody.append(h3, p)
+    divCard.append(imgCard, divCardBody)
+    
+    fragment.appendChild(divCard);
+    conteinerCards.appendChild(fragment);
+}
+function categoriesFilter(events, arrayCategories){
     for(let event of events){
         if(arrayCategories.indexOf(event.category) === -1){
             arrayCategories.push(event.category)
         }
     }
 }
-function printCategories(categories){
+function categoriesPrint(categories){
     const fragment = document.createDocumentFragment()
-    const fragmentCanvas = document.createDocumentFragment()
-    for(const category of categories){
-        //console.log(category)
-        fragment.appendChild(createCategories(category))
-        fragmentCanvas.appendChild(createCategories(category))
-    }
-    categoryCanvas.appendChild(fragmentCanvas)
-    conteinerCategories.appendChild(fragment)
+        categories.forEach(category => fragment.appendChild(categoriesCreate(category)))
+            categoriesContainer.appendChild(fragment)
+            categoryCanvas.appendChild(fragment)
 }
-function createCategories(categories){
+function mixCheck(){
+    const allCheckbox = document.querySelectorAll('.form-check-input')
+    allCheckbox.forEach(checkbox => {
+        checkbox.addEventListener('click', e =>{
+            //console.log(e.target.checked)
+            if(checkbox.checked){
+                //console.log(e.target.id)
+                allCheckbox.forEach(function(checkElement) {
+                    //console.log(checkElement.id)
+                    if(checkElement.id === e.target.id){
+                        checkElement.checked = true;
+                    }
+                });
+            }else{
+                //console.log(e.target.id)
+                allCheckbox.forEach(function(checkElement) {
+                    //console.log(checkElement.id)
+                    if(checkElement.id === e.target.id){
+                        checkElement.checked = false;
+                    }
+                });
+            }
+        })
+    })
+}
+function categoriesCreate(categories){
+    const categoryReplace = categories.replace(/\s/g,'')
     const div = document.createElement('div');
     div.className = 'form-check'
     div.className = 'form-check-inline'
+    div.classList.add(categoryReplace)
 
     const input = document.createElement('input');
     input.className = 'form-check-input'
     input.type = 'checkbox'
-    input.id = categories.replace(/\s/g,'')
+    input.id = categoryReplace
     input.value = `category${categories.replace(/\s/g,'')}`
 
     const label = document.createElement('label');
     label.className = 'form-check-label'
-    label.setAttribute('for', categories.replace(/\s/g,''))
+    label.setAttribute('for', categoryReplace)
     label.textContent = categories
 
     div.append(input, label)
     //console.log(div)
     return div
+}
+function categoriesActiveMediaQuery(categories){
+    const fragment = document.createDocumentFragment()
+            categories.forEach(category => fragment.appendChild(categoriesCreate(category)))
+            categoryCanvas.appendChild(fragment)
+            categoriesContainer.appendChild(fragment)
 }
 function captureCheckboxCheked(arrayCategoriesChecked){
     const checkboxs = document.querySelectorAll('.form-check-input')
@@ -302,57 +367,140 @@ function captureCheckboxCheked(arrayCategoriesChecked){
                 arrayCategoriesChecked.push(checkbox.id)
             }else{
                 //console.log(`input ${checkbox.id} no esta chekeado   `);
-                const indice = arrayCategoriesChecked.indexOf(checkbox.id);
+                const indice = arrayCategoriesChecked.indexOf(checkbox.id);// se busca la posicion en la que se encuentra el checkbox deschecked
                 //console.log(indice);
-                arrayCategoriesChecked.splice(indice, 1)
+                arrayCategoriesChecked.splice(indice, 1)// una vez encontrado se borra
                 conteinerCards.textContent = ``
             }
         })
     });
 }
-function filterCategoriesChecked(events, arrayCategoriesChecked, conteinerCards){
-    categoriesContainer.addEventListener('change', e =>{
-        eventsFilterChecked.length = 0;
-        if(arrayCategoriesChecked.length > 0){
-            arrayCategoriesChecked.forEach(category => {
-                events.filter(event => {
-                    if(event.category.replace(/\s/g,'').indexOf(category) !== -1){
-                        eventsFilterChecked.push(event)
+function filterCategoriesChecked(events, arrayCategoriesChecked, conteinerCards, searchEventCheked, conteinerEvent){
+    const checkboxs = document.querySelectorAll('.form-check-input')
+    //console.log(checkboxs)
+    checkboxs.forEach(checkbox => {
+        checkbox.addEventListener('click', () =>{
+        if(searchEventCheked.length === 0){ // si no hay nada en search
+            //console.log("trabajando SINNN datos en search")
+            eventsFilter.length = 0;
+            if(arrayCategoriesChecked.length > 0){
+                arrayCategoriesChecked.forEach(category => {
+                    events.filter(event => {
+                        if(event.category.replace(/\s/g,'').indexOf(category) !== -1){
+                            eventsFilter.push(event)
+                        }
+                    })
+                    conteinerCards.textContent = ``
+                    printCard(eventsFilter, conteinerCards)
+                    //console.log(eventsFilter)
+                });
+            }else{
+                printCard(events, conteinerCards)
+            }
+        }else{ //si hay algo en search
+            console.log("trabajando con datos en search")
+            eventsFilter.length = 0;
+            if(arrayCategoriesChecked.length !== 0){
+                arrayCategoriesChecked.forEach(category => {
+                    searchEventCheked.filter(event => {
+                        if(event.category.replace(/\s/g,'').indexOf(category) !== -1){
+                            eventsFilter.push(event)
+                        }
+                    })
+                    if(eventsFilter.length > 0){
+                        conteinerCards.textContent = ``
+                        printCard(eventsFilter, conteinerCards)
+                    }else{
+                        conteinerCards.textContent = ``
+                        createCardWithoutResults(conteinerCards)
                     }
-                })
-                conteinerCards.textContent = ``
-                printCard(eventsFilterChecked, conteinerCards)
-                console.log(eventsFilterChecked)
-            });
-        }else{
+                    //console.log(eventsFilter)
+                });
+            }else{
+                    conteinerCards.textContent = ``
+                    printCard(searchEventCheked, conteinerCards)
+                }
+            }
+    })
+    //console.log(events)
+})
+}
+function filterSearch(events, eventsFilter, categoriesChecked, searchEventCheked){
+    search.addEventListener('keyup', e =>{
+        if(search.value.length > 0){// si hay ALGUN valor ingresado en el search
+            if(categoriesChecked.length === 0){//ninguna categoria checkeada
+                searchEventCheked.length = 0
+                e.preventDefault();
+                    events.filter(event => {
+                        if(event.name.toLowerCase().includes(search.value.toLowerCase())){
+                            searchEventCheked.push(event)
+                        }
+                    })
+                    if(searchEventCheked.length > 0){
+                        console.log("resultados encontrados")
+                        conteinerCards.textContent = ``
+                        printCard(searchEventCheked, conteinerCards)
+                    }else{
+                        console.log("ningun resultado encontrado")
+                        conteinerCards.textContent = ``
+                        createCardWithoutResults(conteinerCards)
+                    }
+            }else{ // con categorias checked
+                searchEventCheked.length = 0
+                e.preventDefault();
+                    eventsFilter.filter(event => {
+                        if(event.name.toLowerCase().includes(search.value.toLowerCase())){
+                            searchEventCheked.push(event)
+                        }
+                    })
+                    if(searchEventCheked.length > 0){
+                        conteinerCards.textContent = ``
+                        printCard(searchEventCheked, conteinerCards)
+                    }else{
+                        console.log("ningun resultado encontrado")
+                        conteinerCards.textContent = ``
+                        createCardWithoutResults(conteinerCards)
+                    }
+                    
+            }
+            console.log(events)
+            console.log(searchEventCheked)
+        }else{// NINGUN valor ingresado en el search
+            conteinerCards.textContent = ``
+            categoriesChecked.length = 0;
+            eventsFilter.length = 0;
+            searchEventCheked.length = 0;
             printCard(events, conteinerCards)
         }
     })
-    //console.log(events)
 }
-function filterSearch(events, eventsFilter, categoriesChecked){
-    search.addEventListener('keyup', e =>{
-        if(categoriesChecked.length === 0){
-            e.preventDefault();
-            const searchEvent = [];
-            console.log(categoriesChecked)
-                events.filter(event => {
-                    if(event.name.toLowerCase().indexOf(search.value.toLowerCase()) !== -1){
-                        searchEvent.push(event)
+function colorChecked(categoriesContainer){
+    //console.log(categoriesContainer)
+    const inputs = document.querySelectorAll(".form-check-input")
+    const contenedorInputs = document.querySelectorAll(".form-check-inline")
+        inputs.forEach(input => {
+            input.addEventListener("input", ()=> {
+            //console.log(input.checked)
+            if(input.checked){
+                //console.log(input.id)
+                contenedorInputs.forEach(div => {
+                    //console.log(div.className)
+                    if(div.className.includes(input.id)){
+                        //console.log(div)
+                        div.classList.add("change-border")
                     }
                 })
-                conteinerCards.textContent = ``
-                printCard(searchEvent, conteinerCards)
-        }else{
-            e.preventDefault();
-            const searchEventCheked = [];
-                eventsFilter.filter(event => {
-                    if(event.name.toLowerCase().indexOf(search.value.toLowerCase()) !== -1){
-                        searchEventCheked.push(event)
+            }else{
+                contenedorInputs.forEach(div => {
+                    //console.log(div.className)
+                    if(div.className.includes(input.id)){
+                        //console.log(div)
+                        div.classList.remove("change-border")
                     }
                 })
-            conteinerCards.textContent = ``
-            printCard(searchEventCheked, conteinerCards)
-        }
+            }
+        })
+        //console.log(inputs)
     })
-} */
+}
+

@@ -172,19 +172,18 @@ const categoryCanvas = $("categoryCanvas");
 const categoriesContainer = $("categories");
 const search = $("search");
 const conteinerFilters = $("conteiner-filters")
-const buttonCategories = $("button-categories")
 
 //console.log(events, eventsFilter)
 
 printCard(events, conteinerCards);
 categoriesFilter(events, categories);
-categoriesPrintMobileOrPC(categories);
+categoriesPrint(categories);
 categoriesActiveMediaQuery(categories)
-//categoriesUncheck()
 mixCheck()
 captureCheckboxCheked(categoriesChecked);
 filterCategoriesChecked(events, categoriesChecked, conteinerCards, searchEventCheked, conteinerFilters)
 filterCategoriesChecked(events, categoriesChecked, conteinerCards, searchEventCheked, categoryCanvas)
+colorChecked(categoriesContainer)
 filterSearch(events, eventsFilter, categoriesChecked, searchEventCheked)
 
 function printCard(events, conteinerCards) {
@@ -237,6 +236,39 @@ function createCard(event){
     
     return divCard
 }
+function createCardWithoutResults(conteinerCards){
+    const fragment = document.createDocumentFragment()
+
+    const divCard = document.createElement("div") 
+    divCard.classList.add("card")
+    divCard.classList.add("card-without-results")
+    divCard.classList.add("bg-dark")
+
+    const imgCard = document.createElement("img")
+    imgCard.src = "https://www.tecnozero.com/wp-content/uploads/2019/10/que-es-edr-en-informatica.png"
+    imgCard.classList.add("card-img-top-without")
+    imgCard.alt = `img without results`
+
+    const divCardBody = document.createElement("div")
+    divCardBody.classList.add("card-body")
+
+    const h3 = document.createElement("h3")
+    h3.textContent = "Without Results!!"
+    h3.classList.add("text-center")
+
+    const p = document.createElement("p")
+    p.textContent = "We have no results for this search"
+    h3.classList.add("card-text")
+    
+    const footerCard = document.createElement("div")
+    footerCard.classList.add("footer-card")
+
+    divCardBody.append(h3, p)
+    divCard.append(imgCard, divCardBody)
+    
+    fragment.appendChild(divCard);
+    conteinerCards.appendChild(fragment);
+}
 function categoriesFilter(events, arrayCategories){
     for(let event of events){
         if(arrayCategories.indexOf(event.category) === -1){
@@ -244,84 +276,19 @@ function categoriesFilter(events, arrayCategories){
         }
     }
 }
-function categoriesPrintMobileOrPC(categories){
-    let windowsSize = window.innerWidth
-    console.log(windowsSize)
-    if(windowsSize < 767){
-        const fragment = document.createDocumentFragment()
-        categories.forEach(category => fragment.appendChild(categoriesCreate(category)))
-            categoryCanvas.appendChild(fragment)
-        //console.log("usando el if")
-    }else{
-        const fragment = document.createDocumentFragment()
+function categoriesPrint(categories){
+    const fragment = document.createDocumentFragment()
         categories.forEach(category => fragment.appendChild(categoriesCreate(category)))
             categoriesContainer.appendChild(fragment)
-        //console.log("usando el else")
-    }
-
-    buttonCategories.addEventListener('change', (e) => console.log(e.target));
-    const fragment = document.createDocumentFragment()
-    categories.forEach(category => fragment.appendChild(categoriesCreate(category)))
+            categoryCanvas.appendChild(fragment)
 }
-function categoriesActiveMediaQuery(categories){
-    const mql = window.matchMedia("(max-width:767px)");
-
-    function screenTest(e) {
-        if (e.matches) {
-                /* location.reload()
-                console.log("Mobile activado")
-                categoriesContainer.textContent = '';
-                const fragment = document.createDocumentFragment()
-                categories.forEach(category => fragment.appendChild(categoriesCreate(category)))
-                categoryCanvas.appendChild(fragment) */
-            } else {
-                /* location.reload()
-                console.log("Mobile desactivado")
-                categoryCanvas.textContent = '';
-                const fragment = document.createDocumentFragment()
-                categories.forEach(category => fragment.appendChild(categoriesCreate(category)))
-                categoriesContainer.appendChild(fragment) */
-            }
-        }
-        mql.addEventListener("change", screenTest);
-        const fragment = document.createDocumentFragment()
-                categories.forEach(category => fragment.appendChild(categoriesCreate(category)))
-                categoryCanvas.appendChild(fragment)
-                categoriesContainer.appendChild(fragment)
-}
-/* function categoriesUncheck(){
-    const mql = window.matchMedia("(max-width:767px)");
-
-    function screenTest(e) {
-        if (e.matches) {
-                location.reload()
-                console.log("Mobile activado en Uncheck")
-                const checkboxCategories = document.querySelectorAll('.form-check-input')
-                    checkboxCategories.forEach(function(checkElement) {
-                        checkElement.checked = false;
-                    });
-                    conteinerCards.textContent = ''
-                    printCard(events, conteinerCards)
-            } else {
-                location.reload()
-                console.log("Mobile desactivado en Uncheck")
-                const checkboxCategories = document.querySelectorAll('.form-check-input')
-                    checkboxCategories.forEach(function(checkElement) {
-                        checkElement.checked = false;
-                    });
-                    conteinerCards.textContent = ''
-                    printCard(events, conteinerCards)
-            }
-        }
-        mql.addEventListener("change", screenTest);
-} */
 function mixCheck(){
     const allCheckbox = document.querySelectorAll('.form-check-input')
     allCheckbox.forEach(checkbox => {
         checkbox.addEventListener('click', e =>{
             //console.log(e.target.checked)
             if(checkbox.checked){
-                console.log(e.target.id)
+                //console.log(e.target.id)
                 allCheckbox.forEach(function(checkElement) {
                     //console.log(checkElement.id)
                     if(checkElement.id === e.target.id){
@@ -329,7 +296,7 @@ function mixCheck(){
                     }
                 });
             }else{
-                console.log(e.target.id)
+                //console.log(e.target.id)
                 allCheckbox.forEach(function(checkElement) {
                     //console.log(checkElement.id)
                     if(checkElement.id === e.target.id){
@@ -345,6 +312,7 @@ function categoriesCreate(categories){
     const div = document.createElement('div');
     div.className = 'form-check'
     div.className = 'form-check-inline'
+    div.classList.add(categoryReplace)
 
     const input = document.createElement('input');
     input.className = 'form-check-input'
@@ -361,6 +329,12 @@ function categoriesCreate(categories){
     //console.log(div)
     return div
 }
+function categoriesActiveMediaQuery(categories){
+    const fragment = document.createDocumentFragment()
+            categories.forEach(category => fragment.appendChild(categoriesCreate(category)))
+            categoryCanvas.appendChild(fragment)
+            categoriesContainer.appendChild(fragment)
+}
 function captureCheckboxCheked(arrayCategoriesChecked){
     const checkboxs = document.querySelectorAll('.form-check-input')
     //console.log(checkboxs)
@@ -372,17 +346,19 @@ function captureCheckboxCheked(arrayCategoriesChecked){
                 arrayCategoriesChecked.push(checkbox.id)
             }else{
                 //console.log(`input ${checkbox.id} no esta chekeado   `);
-                const indice = arrayCategoriesChecked.indexOf(checkbox.id);
+                const indice = arrayCategoriesChecked.indexOf(checkbox.id);// se busca la posicion en la que se encuentra el checkbox deschecked
                 //console.log(indice);
-                arrayCategoriesChecked.splice(indice, 1)
+                arrayCategoriesChecked.splice(indice, 1)// una vez encontrado se borra
                 conteinerCards.textContent = ``
             }
         })
     });
 }
 function filterCategoriesChecked(events, arrayCategoriesChecked, conteinerCards, searchEventCheked, conteinerEvent){
-    conteinerEvent.addEventListener('change', e =>{
-        //console.log("searchEventCheked.length", searchEventCheked.length)
+    const checkboxs = document.querySelectorAll('.form-check-input')
+    //console.log(checkboxs)
+    checkboxs.forEach(checkbox => {
+        checkbox.addEventListener('click', () =>{
         if(searchEventCheked.length === 0){ // si no hay nada en search
             //console.log("trabajando SINNN datos en search")
             eventsFilter.length = 0;
@@ -410,20 +386,27 @@ function filterCategoriesChecked(events, arrayCategoriesChecked, conteinerCards,
                             eventsFilter.push(event)
                         }
                     })
-                    conteinerCards.textContent = ``
-                    printCard(eventsFilter, conteinerCards)
+                    if(eventsFilter.length > 0){
+                        conteinerCards.textContent = ``
+                        printCard(eventsFilter, conteinerCards)
+                    }else{
+                        conteinerCards.textContent = ``
+                        createCardWithoutResults(conteinerCards)
+                    }
                     //console.log(eventsFilter)
                 });
             }else{
+                    conteinerCards.textContent = ``
                     printCard(searchEventCheked, conteinerCards)
                 }
             }
     })
     //console.log(events)
+})
 }
 function filterSearch(events, eventsFilter, categoriesChecked, searchEventCheked){
     search.addEventListener('keyup', e =>{
-        if(search.value.length > 0){// si hay algun valor ingresado en el search
+        if(search.value.length > 0){// si hay ALGUN valor ingresado en el search
             if(categoriesChecked.length === 0){//ninguna categoria checkeada
                 searchEventCheked.length = 0
                 e.preventDefault();
@@ -432,9 +415,16 @@ function filterSearch(events, eventsFilter, categoriesChecked, searchEventCheked
                             searchEventCheked.push(event)
                         }
                     })
-                    conteinerCards.textContent = ``
-                    printCard(searchEventCheked, conteinerCards)
-            }else{
+                    if(searchEventCheked.length > 0){
+                        console.log("resultados encontrados")
+                        conteinerCards.textContent = ``
+                        printCard(searchEventCheked, conteinerCards)
+                    }else{
+                        console.log("ningun resultado encontrado")
+                        conteinerCards.textContent = ``
+                        createCardWithoutResults(conteinerCards)
+                    }
+            }else{ // con categorias checked
                 searchEventCheked.length = 0
                 e.preventDefault();
                     eventsFilter.filter(event => {
@@ -442,14 +432,20 @@ function filterSearch(events, eventsFilter, categoriesChecked, searchEventCheked
                             searchEventCheked.push(event)
                         }
                     })
-                conteinerCards.textContent = ``
-                printCard(searchEventCheked, conteinerCards)
+                    if(searchEventCheked.length > 0){
+                        conteinerCards.textContent = ``
+                        printCard(searchEventCheked, conteinerCards)
+                    }else{
+                        console.log("ningun resultado encontrado")
+                        conteinerCards.textContent = ``
+                        createCardWithoutResults(conteinerCards)
+                    }
+                    
             }
             console.log(events)
             console.log(searchEventCheked)
-        }else{
+        }else{// NINGUN valor ingresado en el search
             conteinerCards.textContent = ``
-            
             categoriesChecked.length = 0;
             eventsFilter.length = 0;
             searchEventCheked.length = 0;
@@ -457,3 +453,33 @@ function filterSearch(events, eventsFilter, categoriesChecked, searchEventCheked
         }
     })
 }
+function colorChecked(categoriesContainer){
+    //console.log(categoriesContainer)
+    const inputs = document.querySelectorAll(".form-check-input")
+    const contenedorInputs = document.querySelectorAll(".form-check-inline")
+        inputs.forEach(input => {
+            input.addEventListener("input", ()=> {
+            //console.log(input.checked)
+            if(input.checked){
+                //console.log(input.id)
+                contenedorInputs.forEach(div => {
+                    //console.log(div.className)
+                    if(div.className.includes(input.id)){
+                        //console.log(div)
+                        div.classList.add("change-border")
+                    }
+                })
+            }else{
+                contenedorInputs.forEach(div => {
+                    //console.log(div.className)
+                    if(div.className.includes(input.id)){
+                        //console.log(div)
+                        div.classList.remove("change-border")
+                    }
+                })
+            }
+        })
+        //console.log(inputs)
+    })
+}
+
