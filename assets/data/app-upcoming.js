@@ -242,7 +242,7 @@ function createCard(event){
     pFooter.textContent = `Price: $${event.price}`
 
     const detailsCard = document.createElement("a")
-    detailsCard.setAttribute("href", `./assets/pages/Details.html?event=${event.name.replace(/\s/g,'')}`)
+    detailsCard.setAttribute("href", `./Details.html?event=${event.name.replace(/\s/g,'')}`)
 
     const buttonCard = document.createElement("button")
     buttonCard.textContent = "More information"
