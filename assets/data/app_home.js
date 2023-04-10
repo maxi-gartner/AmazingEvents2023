@@ -185,6 +185,7 @@ filterCategoriesChecked(events, categoriesChecked, conteinerCards, searchEventCh
 filterCategoriesChecked(events, categoriesChecked, conteinerCards, searchEventCheked, categoryCanvas)
 colorChecked(categoriesContainer)
 filterSearch(events, eventsFilter, categoriesChecked, searchEventCheked)
+carrucelSearch(search)
 
 function printCard(events, conteinerCards) {
     const fragment = document.createDocumentFragment()
@@ -489,4 +490,3 @@ function carrucelSearch(search){
         carrucel.classList.add("carousel-inner-click")
     })
 }
-carrucelSearch(search)
