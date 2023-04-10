@@ -254,7 +254,7 @@ function createCardWithoutResults(conteinerCards){
     divCardBody.classList.add("card-body")
 
     const h3 = document.createElement("h3")
-    h3.textContent = "Without Results!!"
+    h3.textContent = "Without results😣"
     h3.classList.add("text-center")
 
     const p = document.createElement("p")
