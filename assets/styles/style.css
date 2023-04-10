@@ -107,7 +107,7 @@ body{
     color: #1261d8;
 }
 .form-control::placeholder {
-    color: #1261d8;
+    color: #000000c9;
 }
 .form-control{
     border: 2px solid #1261d8;
@@ -126,17 +126,23 @@ body{
 }
 .carrucel-pages{
     position: relative;
+    box-shadow: 1px 1px 0 #ba41ba,
+	2px 2px 0 #c63d2b,
+	3px 3px 0 #42afac;
 }
 .carrucel-pages h1{
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: cursive;
     position: absolute;
     bottom: 2rem;
     width: 100vw;
     text-align: center;
-    color: black;
-    font-size: 6vw;
+    color: #000000;
+    font-size: 5vw;
     z-index:1;
-    text-shadow: 0px 0px 3px white, 2px 2px 2px white;
+    text-shadow: -1px 1px 0 #ba41ba,
+	1px 1px 0 #c63d2b,
+	1px -1px 0 #42afac,
+	-1px -1px 0 #c6c23f;
 }
 .carousel-item{
     transition: transform 1.6s ease-in-out;

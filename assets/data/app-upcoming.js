@@ -220,6 +220,9 @@ function createCard(event){
     divCard.classList.add("card")
     divCard.classList.add("bg-dark")
 
+    const detailsCardLinkImg = document.createElement("a")
+    detailsCardLinkImg.setAttribute("href", `./Details.html?event=${event.name.replace(/\s/g,'')}`)
+
     const imgCard = document.createElement("img")
     imgCard.src = event.image
     imgCard.classList.add("card-img-top")
@@ -251,10 +254,11 @@ function createCard(event){
     buttonCard.classList.add("btn")
     buttonCard.classList.add("btn-secondary")
 
+    detailsCardLinkImg.appendChild(imgCard)
     detailsCard.appendChild(buttonCard)
     footerCard.append(pFooter, detailsCard)
     divCardBody.append(h3, p)
-    divCard.append(imgCard, divCardBody, footerCard)
+    divCard.append(detailsCardLinkImg, divCardBody, footerCard)
     
     return divCard
 }
@@ -275,7 +279,7 @@ function createCardWithoutResults(conteinerCards){
     divCardBody.classList.add("card-body")
 
     const h3 = document.createElement("h3")
-    h3.textContent = "Without Results!!"
+    h3.textContent = "Without results😣"
     h3.classList.add("text-center")
 
     const p = document.createElement("p")

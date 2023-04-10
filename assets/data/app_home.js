@@ -199,6 +199,10 @@ function createCard(event){
     divCard.classList.add("card")
     divCard.classList.add("bg-dark")
 
+    
+    const detailsCardLinkImg = document.createElement("a")
+    detailsCardLinkImg.setAttribute("href", `./assets/pages/Details.html?event=${event.name.replace(/\s/g,'')}`)
+
     const imgCard = document.createElement("img")
     imgCard.src = event.image
     imgCard.classList.add("card-img-top")
@@ -230,10 +234,11 @@ function createCard(event){
     buttonCard.classList.add("btn")
     buttonCard.classList.add("btn-secondary")
 
+    detailsCardLinkImg.appendChild(imgCard)
     detailsCard.appendChild(buttonCard)
     footerCard.append(pFooter, detailsCard)
     divCardBody.append(h3, p)
-    divCard.append(imgCard, divCardBody, footerCard)
+    divCard.append(detailsCardLinkImg, divCardBody, footerCard)
     
     return divCard
 }
