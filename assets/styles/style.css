@@ -99,6 +99,19 @@ body{
 .change-border{
     border-bottom: 1px solid #0d6efd;
 }
+.bi-search{
+    position: absolute;
+    right: 10px;
+    top: 4px;
+    font-size: 20px;
+    color: #1261d8;
+}
+.form-control::placeholder {
+    color: #1261d8;
+}
+.form-control{
+    border: 2px solid #1261d8;
+}
 /* ----------------------------------------CAROUSEL -------------------------------- */
 
 .carousel-inner{
@@ -406,6 +419,13 @@ footer{
     }
     .carousel-inner img{
         min-height: 63vw;
+    }
+    .carousel-inner-click{
+        height: 5px;
+        min-height: 0vh;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
     }
 }
 @media screen and (max-width:424px) {

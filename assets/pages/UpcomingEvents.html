@@ -51,7 +51,7 @@
         </nav>
     </header>
     <main>
-        <div class="carrucel-pages">
+        <div class="carrucel-pages" id="carrucel-pages">
             <h1>Upcoming Events</h1>
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
@@ -86,9 +86,8 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"  id="button-categories" >Categories
                 </button>
             </div>
-            <form class="d-flex w-25">
-                <input class="form-control me-1" type="search" placeholder="Search" aria-label="Search" id="search">
-                <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
+            <form class="d-flex w-25" style="position: relative;">
+                <input class="form-control me-1" type="search" placeholder="Search" aria-label="Search" id="search" autocomplete="off"><i class="bi bi-search"></i>
             </form>
         </div>
         <div class="cards" id="cards"></div>

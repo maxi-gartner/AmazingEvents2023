@@ -482,4 +482,11 @@ function colorChecked(categoriesContainer){
         //console.log(inputs)
     })
 }
-
+function carrucelSearch(search){
+    const carrucel = $("carrucel-pages")
+    search.addEventListener("click", () => {
+        carrucel.classList.remove("carousel-inner")
+        carrucel.classList.add("carousel-inner-click")
+    })
+}
+carrucelSearch(search)
