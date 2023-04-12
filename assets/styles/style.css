@@ -66,37 +66,24 @@ body{
 .categories-search{
     padding: 1.5rem 3rem;
 }
-.categories label{
+.form-check-label{
+    position: relative;
     color: white;
-    margin-left: 10px;
-}
-.form-check-inline{
-    margin-bottom: 0.5rem;
-    width: 9.6rem;
+    background: linear-gradient(#191825, #000000);
     border-bottom: 1px solid white;
-    padding: 5px;
+    margin-left: 10px;
+    margin-bottom: 1rem;
+    padding: 5px 10px 5px 40px;
     text-align: center;
     border-radius: 20px 20px 15px 15px;
-    background: linear-gradient(#191825, #000000);
-    /* background-color: #212429; */
 }
-.categories input:checked ~ label,
-.categories-offCanvas input:checked ~ label{
-    color: #295CE0;
-}
-.categories-offCanvas label{
-    margin-left: 1rem;
-}
-.form-check-inline:hover label{
-    color: #0d6efd;
-}
-.form-check-inline:hover{
-    border-bottom: 1px solid #0d6efd;
-}
-.form-check-inline:hover {
-    border-bottom: 1px solid #0d6efd;
+.form-check-input{
+    position: absolute;
+    z-index: 100;
+    left: 10px;
 }
 .change-border{
+    color: #0d6efd;
     border-bottom: 1px solid #0d6efd;
 }
 .bi-search{
@@ -133,7 +120,7 @@ body{
     font-weight: bold;
     position: absolute;
     bottom: 2rem;
-    width: 100vw;
+    width: 100%;
     text-align: center;
     color: #000000;
     font-size: 5vw;
@@ -317,8 +304,7 @@ footer{
         color: #FFFFFF8C;
     }
     .offcanvas  a,
-    .offcanvas  h2,
-    .offcanvas  label{
+    .offcanvas  h2{
         color: white;
     }
     .nav-item:hover{
@@ -337,23 +323,24 @@ footer{
         text-align: center;
         background: rgba(0, 0, 0, 0.384);
     }
-    .categories-offCanvas{
-        display: flex;
-        flex-direction: column;
-        color: #FFFFFF8C;
-    }
-    .form-check-inline{
-        background: rgba(0, 0, 0, 0.349);
-    }
-    .categories-offCanvas div,
     .categories-offCanvas h2{
-        margin-bottom: 2vw;
         width: 15rem;
         text-align: start;
         padding-left: 20px ;
     }
-    .categories-offCanvas h2{
+    .categories-offCanvas{
         margin-top: 4vw;
+        display: flex;
+        flex-direction: column;
+        width: 15rem;
+    }
+    .change-border{
+        color: #0d6efd;
+        border-bottom: 1px solid #0d6efd;
+    }
+    .form-check-label{
+        border-radius: 5px;
+        display: block;
     }
     .categories-search form{
         width: 60vw !important;;
