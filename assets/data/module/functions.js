@@ -272,6 +272,12 @@ export function filterSearch(events, eventsFilter, categoriesChecked, searchEven
         console.log(search.value.length)
     })
 }
+/** 
+ * 
+ * @param id
+ * @ si la pagina esta en mobile el carrucel al usar el buscador desaparece
+ * 
+**/
 export function carrucelSearch(search){
     const carrucel = $("carrucel-pages")
     search.addEventListener("click", () => {
@@ -334,4 +340,138 @@ const currentDate_getTime = currentDate_parsed.getTime(); // devuelve el valor n
             }
         }
     }
+}
+export function calculationsEventsTable(events, eventsPast, allCapacity, arrayAttendancesPast){
+    //calculo de mayor porcentaje de asistencia
+    eventsPast.forEach(event=> {
+        let resAtt = (event.assistance * 100)/event.capacity
+        //console.log(resultado)
+        arrayAttendancesPast.push({name: event.name, percentage: resAtt})
+    })
+    //calculo de mayor capacidad
+    events.forEach(event=> {
+        let resCap = event.capacity
+        allCapacity.push(resCap)
+    })
+}
+/** 
+ * 
+ * @param array array a recorrer(upcoming o past)
+ * @param boolean si el array es upcoming es true si es past es false
+ * 
+**/
+export function calculationsByCategory(pastOrUpcoming, isUpcoming){
+    let categories = []
+    let dataTable = []
+    categoriesFilter(pastOrUpcoming, categories)
+
+        categories.forEach((category) => {
+            let revenues = 0;
+            let attendance = 0
+            let estimate = 0
+            let assistance = 0
+            let capacity = 0
+            pastOrUpcoming.forEach((event) => {
+                if ((event.category == category)){
+                    //console.log(Number(data.assistance));
+                    if(isUpcoming){
+                        revenues = revenues + (event.estimate * event.price)
+                        estimate = estimate + event.estimate
+                        capacity = capacity + event.capacity
+                    }else{
+                        revenues = revenues + (event.assistance * event.price)
+                        assistance = assistance + event.assistance
+                        capacity = capacity + event.capacity
+                    }
+                }
+            });
+            if(isUpcoming){
+                attendance = attendance + ((estimate * 100)/capacity)
+                //console.log("revenues", revenues)
+            }else{
+                attendance = attendance + ((assistance * 100)/capacity)
+            }
+            dataTable.push({name: category, revenues: revenues, attendance: attendance})
+        });
+        return dataTable
+}
+/** 
+ * 
+ * @param array array a recorrer
+ * @param boolean si es maximo true o minimo false
+ * @returns el maximo o el minimo del array 
+ * 
+**/
+export function minOrMax(array, ismax){
+        let max = 0;
+        let min = Infinity;
+            for ( let numero of array ) {
+                    if (max < numero)
+                        max = numero
+                    if (min > numero)
+                        min = numero
+                    }
+                if(ismax){
+                    return max
+                }else{
+                    return min
+                }
+}
+export function printTableStatic(arrayAttendancesPast, events, allCapacity){
+    const attendancesPast = arrayAttendancesPast.map(function(event){return event.percentage});
+    const highestAtt = []
+    const lowestAtt = []
+    const largerCapacity = []
+    //console.log(largerCapacity)
+
+    arrayAttendancesPast.forEach(event=>{
+        if(event.percentage === minOrMax(attendancesPast, true)){highestAtt.push(event)}
+        if(event.percentage === minOrMax(attendancesPast, false)){lowestAtt.push(event)}
+    });
+        events.forEach(event=>{
+            if(event.capacity === minOrMax(allCapacity, true)){largerCapacity.push(event)}
+    });
+    
+    //console.log(minOrMax(attendancesPast, true))
+    const tableStatic = $("table-Static")
+    //console.log(tableStatic)
+    const tr = document.createElement("tr")
+    const td1 = document.createElement("td")
+    const td2 = document.createElement("td")
+    const td3 = document.createElement("td")
+    td1.textContent = `${highestAtt[0].name} ${(highestAtt[0].percentage).toFixed(1)} %`
+    td2.textContent = `${lowestAtt[0].name} ${(lowestAtt[0].percentage).toFixed(1)} %`
+    td3.textContent = `${largerCapacity[0].name} ${(largerCapacity[0].capacity)}`
+    tr.append(td1, td2, td3)
+    tableStatic.appendChild(tr)
+}
+export function printTable(eventsUpcoming, eventsPast){
+    const tableUpcoming = $("table-upcoming")
+    const tablePast = $("table-past")
+    
+    const dataUpcoming = calculationsByCategory(eventsUpcoming, true)
+    const dataPast = calculationsByCategory(eventsPast, false)
+
+    dataUpcoming.forEach(event =>{
+        const tr = document.createElement("tr")
+        const td = document.createElement("td")
+        td.textContent = event.name
+        const td2 = document.createElement("td")
+        td2.textContent = "US$" + " " + event.revenues
+        const td3 = document.createElement("td")
+        td3.textContent = event.attendance.toFixed(2) + "%"
+        tr.append(td, td2, td3)
+        tableUpcoming.appendChild(tr)
+    })
+    dataPast.forEach(event =>{
+        const tr = document.createElement("tr")
+        const td = document.createElement("td")
+        td.textContent = event.name
+        const td2 = document.createElement("td")
+        td2.textContent = "US$" + " " + event.revenues
+        const td3 = document.createElement("td")
+        td3.textContent = event.attendance.toFixed(2) + "%"
+        tr.append(td, td2, td3)
+        tablePast.appendChild(tr)
+    })
 }

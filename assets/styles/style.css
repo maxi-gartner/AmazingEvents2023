@@ -201,6 +201,7 @@ body{
     border: 1px solid white;
     background-color: #343a40;
     width: 80vw;
+    text-align: center;
 }
 .table-stats td,
 .table-stats th{
