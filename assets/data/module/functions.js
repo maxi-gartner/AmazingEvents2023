@@ -12,8 +12,9 @@ export function createCard(event , address){
     divCard.classList.add("card")
     divCard.classList.add("bg-dark")
     
+    //cambiar el id
     const detailsCardLinkImg = document.createElement("a")
-    detailsCardLinkImg.setAttribute("href", `${address}Details.html?event=${event.name.replace(/\s/g,'')}`)
+    detailsCardLinkImg.setAttribute("href", `${address}Details.html?event=${event._id}`)
 
     const imgCard = document.createElement("img")
     imgCard.src = event.image
@@ -38,7 +39,7 @@ export function createCard(event , address){
     pFooter.textContent = `Price: $${event.price}`
 
     const detailsCard = document.createElement("a")
-    detailsCard.setAttribute("href", `${address}Details.html?event=${event.name.replace(/\s/g,'')}`)
+    detailsCard.setAttribute("href", `${address}Details.html?event=${event._id}`)
 
     const buttonCard = document.createElement("button")
     buttonCard.textContent = "More information"
@@ -474,4 +475,57 @@ export function printTable(eventsUpcoming, eventsPast){
         tr.append(td, td2, td3)
         tablePast.appendChild(tr)
     })
+}
+export function createCardDetails(event){
+    const divCard = document.createElement("div");
+    divCard.classList.add("card-details")
+    divCard.classList.add("bg-dark")
+
+        const imgCard = document.createElement("img")
+        imgCard.src = event.image
+        imgCard.classList.add("card-img-details")
+        imgCard.alt = `img ${event.name}`
+
+    const divCardBody = document.createElement("div")
+    divCardBody.classList.add("description")
+
+        const h1 = document.createElement("h1")
+        h1.textContent = event.name
+        h1.classList.add("text-center")
+
+        const h3 = document.createElement("h3")
+        h3.textContent = event.date
+        h3.classList.add("card-text")
+
+        const pCategory = document.createElement("p")
+        pCategory.textContent = `Category: ${event.category}`
+        
+        const p = document.createElement("p")
+        p.textContent = event.description
+        h3.classList.add("card-text")
+
+        const pFooter = document.createElement("p")
+        pFooter.textContent = `Price: $${event.price}`
+        
+        const link = document.createElement("a")
+        link.setAttribute("href", "../../index.html")
+
+    const buttonCard = document.createElement("button")
+    buttonCard.textContent = "Go back to start"
+    buttonCard.type = "button"
+    buttonCard.classList.add("btn")
+    buttonCard.classList.add("btn-secondary")
+
+    link.appendChild(buttonCard)
+    divCardBody.append(h1, h3, pCategory, p, pFooter, link)
+    divCard.append(imgCard, divCardBody)
+    
+    return divCard
+}
+export function printCardDetails(events, conteinerCards, id) {
+    const fragment = document.createDocumentFragment()
+    const eventFilter = events.find(element => element._id == id)
+    console.log(eventFilter)
+            fragment.appendChild(createCardDetails(eventFilter));
+    conteinerCards.appendChild(fragment);
 }
